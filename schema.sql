@@ -1,4 +1,11 @@
 --
+-- TDIN Assignment #2
+-- CakePHP schema conventions.
+-- MySQL standards.
+--
+
+
+--
 -- Table structure for table `tickets`
 --
 
