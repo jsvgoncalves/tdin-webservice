@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` varchar(36) NOT NULL,
   `name` varchar(100) NOT NULL, 
   `email` varchar(100) NOT NULL, 
+  `password` varchar(255) NOT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -61,6 +62,7 @@ CREATE TABLE IF NOT EXISTS `solvers` (
   `id` varchar(36) NOT NULL,
   `name` varchar(100) NOT NULL, 
   `email` varchar(100) NOT NULL, 
+  `password` varchar(255) NOT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
