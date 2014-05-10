@@ -2,7 +2,7 @@
 	<?php echo $this->Form->create('User'); ?>
 		<ul>
 			<li>
-				<p>Username:</p>
+				<p>E-mail:</p>
 				<?php echo $this->Form->input('email', 
 				array('label' => false, 'autocomplete' => 'off')); ?>
 			</li>
@@ -13,6 +13,6 @@
 			</li>
 		</ul>
 		<?php echo $this->Session->flash(); ?>
-		<?php echo $this->Form->button('Entrar'); ?>
+		<?php echo $this->Form->button('Login'); ?>
 	<?php echo $this->Form->end(); ?>
 </div> <!-- end login -->
