@@ -31,4 +31,31 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+	
+	// Runs before every other method.
+	// Sets the userData var with the user's Auth information.
+	function beforeFilter() {
+		$this->set('userData', $this->Auth->user());
+	}
+
+	// Components used in all controllers.
+	public $components = array(
+		'Session',
+		'Auth' => array(
+			'loginRedirect' => array('controller' => 'users', 'action' => 'index'),
+			'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
+			'authenticate' => array(
+				'Form' => array(
+					'fields' => array(
+						'username' => 'email',
+						'password' => 'password'
+					),
+					'passwordHasher' => array(
+						'className' => 'Simple',
+						'hashType' => 'sha256'
+					)
+				)
+			)
+		));
+
 }

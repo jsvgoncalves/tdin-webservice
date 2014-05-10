@@ -1,11 +1,26 @@
 <?php
 App::uses('AppModel', 'Model');
+App::uses('AuthComponent', 'Controller/Component');
+App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 /**
  * User Model
  *
  * @property Ticket $Ticket
  */
 class User extends AppModel {
+
+	// public $displayField = 'username';
+
+	public function beforeSave($options = array()) {
+		//if (isset($this->data[$this->alias]['password'])) {
+		if (!empty($this->data['User']['password'])) {
+			$passwordHasher = new SimplePasswordHasher(array('hashType' => 'sha256'));
+			$this->data['User']['password'] = $passwordHasher->hash(
+				$this->data['User']['password']
+			);
+		}
+		return true;
+	}
 
 /**
  * Validation rules

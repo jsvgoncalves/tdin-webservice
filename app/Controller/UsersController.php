@@ -101,4 +101,49 @@ class UsersController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+
+/**
+ * List method.
+ * Lists the open ticks of the given user.
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+/*	public function list($id = null) {
+		if(!$id == null) {
+			// Check if the user has access to this user's tickets
+			// If not, then reassign the id to his own id. (from session)
+		}
+
+		if (!$this->User->exists($id)) {
+			throw new NotFoundException(__('Invalid user'));
+		}
+		if ($this->request->is(array('post', 'put'))) {
+			if ($this->User->save($this->request->data)) {
+				$this->Session->setFlash(__('The user has been saved.'));
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+			}
+		} else {
+			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
+			$this->request->data = $this->User->find('first', $options);
+		}
+	}*/
+
+	public function login() {
+		// $this->layout = "login";
+		if ($this->request->is('post')) {
+			if ($this->Auth->login()) {
+				$this->redirect($this->Auth->redirect());
+			} else {
+				$this->Session->setFlash('Invalid email or password');
+			}
+		}
+	}
+
+	public function logout() {
+		$this->redirect($this->Auth->logout());
+	}
 }
