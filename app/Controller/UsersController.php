@@ -57,6 +57,11 @@ class UsersController extends AppController {
  * @return void
  */
 	public function add() {
+		// If user is not logged in show the login layout.
+		if(!$this->Auth->loggedIn()) {
+			$this->layout = "login";
+		}
+
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
@@ -144,7 +149,7 @@ class UsersController extends AppController {
 	}*/
 
 	public function login() {
-		// $this->layout = "login";
+		$this->layout = "login";
 		if ($this->request->is('post')) {
 			if ($this->Auth->login()) {
 				$this->redirect($this->Auth->redirect());
