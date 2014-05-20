@@ -48,7 +48,11 @@ class UsersController extends AppController {
 			throw new NotFoundException(__('Invalid user'));
 		}
 		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
-		$this->set('user', $this->User->find('first', $options));
+		$user = $this->User->find('first', $options);
+		$this->set(array(
+            'user' => $user,
+            '_serialize' => array('user')
+        ));
 	}
 
 /**
