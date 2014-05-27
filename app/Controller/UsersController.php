@@ -172,4 +172,18 @@ class UsersController extends AppController {
 	public function logout() {
 		$this->redirect($this->Auth->logout());
 	}
+
+	public function mobileLogin() {
+		$id = $this->Auth->user('id');
+		if (!$this->User->exists($id)) {
+			throw new NotFoundException(__('Invalid user'));
+		}
+		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
+		$user = $this->User->find('first', $options);
+		$this->set(array(
+			'user' => $user,
+			'status' => $this->status,
+			'_serialize' => array('status', 'user')
+		));
+	}
 }
