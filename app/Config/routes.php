@@ -32,6 +32,7 @@
 
 // Add a simpler router to login and logout actions.
 	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
+	Router::connect('/mobileLogin', array('controller' => 'users', 'action' => 'mobileLogin'));
 	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
 
 /**
