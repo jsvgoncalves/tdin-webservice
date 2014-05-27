@@ -23,7 +23,7 @@ class UsersController extends AppController {
  */
 	function beforeFilter()	{
 		parent::beforeFilter();
-		$this->Auth->allow('add');
+		$this->Auth->allow('add', 'login');
 	}
 
 /**
@@ -33,7 +33,13 @@ class UsersController extends AppController {
  */
 	public function index() {
 		$this->User->recursive = 0;
-		$this->set('users', $this->Paginator->paginate());
+		$users = $this->Paginator->paginate();
+		//echo $this->request->params['ext'];
+		$this->set(array(
+			'users' => $users,
+			'status' => $this->status,
+			'_serialize' => array('status', 'users')
+		));
 	}
 
 /**
@@ -48,11 +54,11 @@ class UsersController extends AppController {
 			throw new NotFoundException(__('Invalid user'));
 		}
 		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
-		$user = $this->User->find('first', $options);
+		$user = $this->User->find('first', $options);		
 		$this->set(array(
-            'user' => $user,
-            '_serialize' => array('user')
-        ));
+			'user' => $user,
+			'_serialize' => array('user')
+		));
 	}
 
 /**
