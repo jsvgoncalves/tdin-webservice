@@ -32,6 +32,8 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 	
+	public $status = 'ok';
+
 	// Runs before every other method.
 	// Sets the userData var with the user's Auth information.
 	function beforeFilter() {
@@ -47,6 +49,16 @@ class AppController extends Controller {
 			'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
 			'authenticate' => array(
 				'Form' => array(
+					'fields' => array(
+						'username' => 'email',
+						'password' => 'password'
+					),
+					'passwordHasher' => array(
+						'className' => 'Simple',
+						'hashType' => 'sha256'
+					)
+				),
+				'Basic' => array(
 					'fields' => array(
 						'username' => 'email',
 						'password' => 'password'
