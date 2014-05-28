@@ -57,7 +57,8 @@ class UsersController extends AppController {
 		$user = $this->User->find('first', $options);		
 		$this->set(array(
 			'user' => $user,
-			'_serialize' => array('user')
+			'status' => $this->status,
+			'_serialize' => array('status', 'user')
 		));
 	}
 
