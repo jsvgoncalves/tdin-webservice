@@ -32,7 +32,11 @@ class DepartmentsController extends AppController {
  */
 	public function index() {
 		$this->Department->recursive = 0;
-		$this->set('departments', $this->Paginator->paginate());
+		$this->set(array(
+			'departments', $this->Paginator->paginate(),
+			'status' => $this->status,
+			'_serialize' => array('status', 'departments')
+			));
 	}
 
 /**
