@@ -16,6 +16,16 @@ class DepartmentsController extends AppController {
 	public $components = array('Paginator');
 
 /**
+ * beforeFilter method
+ *
+ * allows the add() action to be shown even without login.
+ */
+	function beforeFilter()	{
+		parent::beforeFilter();
+		$this->Auth->allow('index', 'view', 'add', 'getSecondaryTickets');
+	}
+
+/**
  * index method
  *
  * @return void
@@ -100,5 +110,23 @@ class DepartmentsController extends AppController {
 			$this->Session->setFlash(__('The department could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+/**
+ * get secondary tickets associated with this department.
+ *
+ *
+ *
+ */
+	public function getSecondaryTickets($id = null)	{
+		if (!$this->Department->exists($id)) {
+			throw new NotFoundException(__('Invalid department'));
+		}
+		$options = array('conditions' => array('Department.' . $this->Department->primaryKey => $id));
+		$this->set(array(
+			'department' => $this->Department->find('first', $options),
+			'status' => $this->status,
+			'_serialize' => array('status', 'department')
+			));
 	}
 }
