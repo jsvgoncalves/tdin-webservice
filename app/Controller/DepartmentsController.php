@@ -51,7 +51,11 @@ class DepartmentsController extends AppController {
 			throw new NotFoundException(__('Invalid department'));
 		}
 		$options = array('conditions' => array('Department.' . $this->Department->primaryKey => $id));
-		$this->set('department', $this->Department->find('first', $options));
+		$this->set(array(
+			'department' => $this->Department->find('first', $options),
+			'status' => $this->status,
+			'_serialize' => array('status', 'department')
+			));
 	}
 
 /**
