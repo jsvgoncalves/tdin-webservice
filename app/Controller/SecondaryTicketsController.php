@@ -15,6 +15,17 @@ class SecondaryTicketsController extends AppController {
  */
 	public $components = array('Paginator');
 
+
+/**
+ * beforeFilter method
+ *
+ * allows the add() action to be shown even without login.
+ */
+	function beforeFilter()	{
+		parent::beforeFilter();
+		$this->Auth->allow('index', 'view', 'add', 'edit', 'getLastTickets');
+	}	
+
 /**
  * index method
  *
