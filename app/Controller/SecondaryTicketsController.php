@@ -136,7 +136,8 @@ class SecondaryTicketsController extends AppController {
 			'secondaryTickets' => $secondaryTickets,
 			'status' => $this->status,
 			'request_date' => date('Y-m-d H:i:s'),
-			'_serialize' => array('status', 'request_date', 'secondaryTickets')
+			'requested_date' => date('Y-m-d H:i:s', strtotime($date)),
+			'_serialize' => array('status', 'request_date', 'requested_date', 'secondaryTickets')
 			));
 	}
 }
