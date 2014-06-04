@@ -120,13 +120,14 @@ class SecondaryTicketsController extends AppController {
 		if (!$this->SecondaryTicket->Department->exists($id)) {
 			throw new NotFoundException(__('Invalid department'));
 		}
+		$date = base64_decode($date);
 		//$this->SecondaryTicket->recursive = 0;
 		$this->SecondaryTicket->contain(array('Ticket'));
 		$options = 
 			array('conditions' => 
 				array(
 					'SecondaryTicket.department_id' => $id,
-					'SecondaryTicket.created >' => date('Y-m-d', strtotime("-6 weeks"))
+					'SecondaryTicket.created >' => date('Y-m-d H:i:s', strtotime($date))
 				)
 			);
 
