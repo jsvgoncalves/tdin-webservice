@@ -125,7 +125,7 @@ class SecondaryTicketsController extends AppController {
 		$options = 
 			array('conditions' => 
 				array(
-				//	'SecondaryTicket.department_id' => $id,
+					'SecondaryTicket.department_id' => $id,
 					'SecondaryTicket.created >' => date('Y-m-d', strtotime("-6 weeks"))
 				)
 			);
