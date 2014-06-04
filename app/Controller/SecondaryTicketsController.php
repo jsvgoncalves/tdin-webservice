@@ -133,7 +133,13 @@ class SecondaryTicketsController extends AppController {
 		}
 		$date = base64_decode($date);
 		//$this->SecondaryTicket->recursive = 0;
-		$this->SecondaryTicket->contain(array('Ticket'));
+		$this->SecondaryTicket->contain(array(
+				'Ticket' => array(
+						'User' => array('id','name','email'),
+						'Solver' => array('id','name','email')
+				)
+			)
+		);
 		$options = 
 			array('conditions' => 
 				array(
