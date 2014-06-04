@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `modified` datetime DEFAULT NULL,
   `title` varchar(100) NOT NULL,
   `description` text COLLATE utf8_unicode_ci,
+  `reply` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -35,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `secondary_tickets` (
   `modified` datetime DEFAULT NULL,
   `title` varchar(100) NOT NULL,
   `description` text COLLATE utf8_unicode_ci,
+  `reply` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
