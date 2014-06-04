@@ -26,6 +26,16 @@ class TicketsController extends AppController {
 	}
 
 /**
+ * allTickets method
+ *
+ * @return void
+ */
+	public function allTickets() {
+		$this->Ticket->recursive = 0;
+		$this->set('tickets', $this->Paginator->paginate());
+	}
+
+/**
  * view method
  *
  * @throws NotFoundException

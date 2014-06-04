@@ -5,8 +5,7 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('user_id');
-		echo $this->Form->input('solver_id');
-		echo $this->Form->input('status');
+		echo $this->Form->hidden('solver_id');
 		echo $this->Form->input('title');
 		echo $this->Form->input('description');
 	?>
