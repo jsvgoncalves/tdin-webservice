@@ -57,6 +57,7 @@ class TicketsController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
+			$this->request->data['Ticket']['user_id'] = $this->Auth->user()['id'];
 			$this->Ticket->create();
 			if ($this->Ticket->save($this->request->data)) {
 				$this->Session->setFlash(__('The ticket has been saved.'));
@@ -65,9 +66,6 @@ class TicketsController extends AppController {
 				$this->Session->setFlash(__('The ticket could not be saved. Please, try again.'));
 			}
 		}
-		$users = $this->Ticket->User->find('list');
-		$solvers = $this->Ticket->Solver->find('list');
-		$this->set(compact('users', 'solvers'));
 	}
 
 /**
@@ -92,6 +90,7 @@ class TicketsController extends AppController {
 			$options = array('conditions' => array('Ticket.' . $this->Ticket->primaryKey => $id));
 			$this->request->data = $this->Ticket->find('first', $options);
 		}
+
 		$users = $this->Ticket->User->find('list');
 		$solvers = $this->Ticket->Solver->find('list');
 		$this->set(compact('users', 'solvers'));
