@@ -7,6 +7,17 @@ App::uses('AppModel', 'Model');
  */
 class Solver extends AppModel {
 
+	public function beforeSave($options = array()) {
+		//if (isset($this->data[$this->alias]['password'])) {
+		if (!empty($this->data['Solver']['password'])) {
+			$passwordHasher = new SimplePasswordHasher(array('hashType' => 'sha256'));
+			$this->data['Solver']['password'] = $passwordHasher->hash(
+				$this->data['Solver']['password']
+			);
+		}
+		return true;
+	}
+
 /**
  * Validation rules
  *
@@ -26,6 +37,16 @@ class Solver extends AppModel {
 		'email' => array(
 			'email' => array(
 				'rule' => array('email'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'password' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
