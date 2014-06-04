@@ -107,4 +107,35 @@ class SecondaryTicketsController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+
+/**
+ * getLastTickets method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function getLastTickets($id = null, $date = null) {
+		if (!$this->SecondaryTicket->Department->exists($id)) {
+			throw new NotFoundException(__('Invalid department'));
+		}
+		//$this->SecondaryTicket->recursive = 0;
+		$this->SecondaryTicket->contain(array('Ticket'));
+		$options = 
+			array('conditions' => 
+				array(
+				//	'SecondaryTicket.department_id' => $id,
+					'SecondaryTicket.created >' => date('Y-m-d', strtotime("-6 weeks"))
+				)
+			);
+
+		$secondaryTickets = $this->SecondaryTicket->find('all', $options);
+		$this->set(array(
+			'secondaryTickets' => $secondaryTickets,
+			'status' => $this->status,
+			'request_date' => date('Y-m-d H:i:s'),
+			'_serialize' => array('status', 'request_date', 'secondaryTickets')
+			));
+	}
 }

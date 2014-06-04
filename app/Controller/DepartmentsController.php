@@ -22,7 +22,7 @@ class DepartmentsController extends AppController {
  */
 	function beforeFilter()	{
 		parent::beforeFilter();
-		$this->Auth->allow('index', 'view', 'add', 'getSecondaryTickets');
+		$this->Auth->allow('index', 'view', 'add', 'edit', 'getSecondaryTickets');
 	}
 
 /**
@@ -137,4 +137,5 @@ class DepartmentsController extends AppController {
 			'_serialize' => array('status', 'department')
 			));
 	}
+
 }
