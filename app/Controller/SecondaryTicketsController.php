@@ -157,4 +157,40 @@ class SecondaryTicketsController extends AppController {
 			'_serialize' => array('status', 'request_date', 'requested_date', 'secondaryTickets')
 			));
 	}
+
+/**
+ * addFromApp method
+ *
+ * @return void
+ */
+	public function addFromApp($dept_uuid = null, $ticket_uuid = null, $title = null, $msg = null) {
+		$this->loadModel('Ticket');
+		$this->loadModel('Department');
+		if (!$this->Ticket->exists($ticket_uuid)) {
+			throw new NotFoundException(__('Invalid ticket'));
+		}
+		if (!$this->Department->exists($dept_uuid)) {
+			throw new NotFoundException(__('Invalid department'));
+		}
+
+		$this->SecondaryTicket->create();
+		$data = array(
+				'department_id' => $dept_uuid,
+				'ticket_id' => $ticket_uuid,
+				'title' => $title,
+				'description' => $msg
+			);
+		if ($this->SecondaryTicket->save($data)) {
+			$this->Session->setFlash(__('The secondary ticket has been saved.'));
+			//return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->status = 'fail';
+			$this->Session->setFlash(__('The secondary ticket could not be saved. Please, try again.'));
+		}
+
+		$this->set(array(
+			'status' => $this->status,
+			'_serialize' => array('status')
+		));
+	}				
 }
