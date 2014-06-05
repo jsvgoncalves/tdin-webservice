@@ -128,4 +128,23 @@ class TicketsController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+/**
+ * unassigned method
+ *
+ * @return void
+ */
+	public function unassigned() {
+		$this->Ticket->recursive = 0;
+		$this->Paginator->settings = array(
+			'conditions' => array('Ticket.status' => '0'),
+			'limit' => 10
+		);
+		$tickets = $this->Paginator->paginate();
+		$this->set(array(
+			'tickets' => $tickets,
+			'status' => $this->status,
+			'_serialize' => array('status', 'tickets')
+		));
+	}
 }
