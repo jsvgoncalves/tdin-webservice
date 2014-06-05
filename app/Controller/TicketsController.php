@@ -147,4 +147,22 @@ class TicketsController extends AppController {
 			'_serialize' => array('status', 'tickets')
 		));
 	}
+
+/**
+ * accept method
+ *
+ * @return void
+ */
+	public function accept($id = null) {
+		if (!$this->Ticket->exists($id)) {
+			throw new NotFoundException(__('Invalid ticket'));
+		}
+		$this->Ticket->id = $id;
+		$this->Ticket->saveField('solver_id', $this->Auth->user()['id']);
+		$this->Ticket->saveField('status', '1');
+		$this->set(array(
+			'status' => $this->status,
+			'_serialize' => array('status')
+		));
+	}	
 }
