@@ -106,4 +106,31 @@ class SolversController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+/**
+ * assigned method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function assigned($id = null) {
+		if (!$this->Solver->exists($id)) {
+			throw new NotFoundException(__('Invalid solver'));
+		}
+		$this->Solver->contain(array(
+			'Ticket' => array(
+					'conditions' => array('Ticket.status' =>  array('1', '2')),
+					'User' => array('id','name','email')
+			)
+		));
+
+		$options = array('conditions' => array('Solver.' . $this->Solver->primaryKey => $id));
+		$solver = $this->Solver->find('first', $options);
+		$this->set(array(
+			'solver' => $solver,
+			'status' => $this->status,
+			'_serialize' => array('status', 'solver')
+		));
+	}	
 }
