@@ -18,7 +18,7 @@
 		</dd>
 		<dt><?php echo __('Status'); ?></dt>
 		<dd>
-			<?php echo h($ticket['Ticket']['status']); ?>
+			<?php echo h($this->Status->code($ticket['Ticket']['status'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>

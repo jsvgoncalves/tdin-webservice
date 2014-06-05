@@ -12,7 +12,7 @@
 	</tr>
 	<?php foreach ($tickets as $ticket): ?>
 	<tr>
-		<td><?php echo h($ticket['Ticket']['status']); ?>&nbsp;</td>
+		<td><?php echo h($this->Status->code($ticket['Ticket']['status'])); ?>&nbsp;</td>
 		<td><?php echo h($ticket['Ticket']['title']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($ticket['Solver']['name'], array('controller' => 'solvers', 'action' => 'view', $ticket['Solver']['id'])); ?>

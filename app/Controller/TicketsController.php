@@ -16,6 +16,14 @@ class TicketsController extends AppController {
 	public $components = array('Paginator');
 
 /**
+ * Helpers
+ *
+ * @var array
+ */
+        public $helpers = array('Status');
+
+
+/**
  * index method
  *
  * @return void
