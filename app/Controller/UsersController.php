@@ -175,12 +175,13 @@ class UsersController extends AppController {
 	}
 
 	public function mobileLogin() {
+		$this->loadModel('Solver');
 		$id = $this->Auth->user('id');
-		if (!$this->User->exists($id)) {
+		if (!$this->Solver->exists($id)) {
 			throw new NotFoundException(__('Invalid user'));
 		}
-		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
-		$user = $this->User->find('first', $options);
+		$options = array('conditions' => array('Solver.' . $this->Solver->primaryKey => $id));
+		$user = $this->Solver->find('first', $options);
 		$this->set(array(
 			'user' => $user,
 			'status' => $this->status,
