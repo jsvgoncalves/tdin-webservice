@@ -41,6 +41,12 @@
 			<?php echo h($ticket['Ticket']['description']); ?>
 			&nbsp;
 		</dd>
+                <dt><?php echo __('Reply'); ?></dt>
+                <dd>
+                        <?php echo h($ticket['Ticket']['reply']); ?>
+                        &nbsp;
+                </dd>
+
 	</dl>
 </div>
 <div class="actions">
