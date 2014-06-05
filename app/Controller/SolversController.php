@@ -37,7 +37,12 @@ class SolversController extends AppController {
 			throw new NotFoundException(__('Invalid solver'));
 		}
 		$options = array('conditions' => array('Solver.' . $this->Solver->primaryKey => $id));
-		$this->set('solver', $this->Solver->find('first', $options));
+		$solver = $this->Solver->find('first', $options);
+		$this->set(array(
+			'solver' => $solver,
+			'status' => $this->status,
+			'_serialize' => array('status', 'solver')
+		));
 	}
 
 /**
