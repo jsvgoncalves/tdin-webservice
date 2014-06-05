@@ -178,6 +178,7 @@ class SecondaryTicketsController extends AppController {
 				'department_id' => $dept_uuid,
 				'ticket_id' => $ticket_uuid,
 				'title' => $title,
+				'status' => '2',
 				'description' => $msg
 			);
 		if ($this->SecondaryTicket->save($data)) {
