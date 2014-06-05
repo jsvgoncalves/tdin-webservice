@@ -58,8 +58,17 @@ class TicketsController extends AppController {
 		if (!$this->Ticket->exists($id)) {
 			throw new NotFoundException(__('Invalid ticket'));
 		}
+		$this->Ticket->contain(array('SecondaryTicket' => array('Department'), 'User', 'Solver'
+		));
+
 		$options = array('conditions' => array('Ticket.' . $this->Ticket->primaryKey => $id));
-		$this->set('ticket', $this->Ticket->find('first', $options));
+		$ticket = $this->Ticket->find('first', $options);
+
+		$this->set(array(
+			'ticket' => $ticket,
+			'status' => $this->status,
+			'_serialize' => array('status', 'ticket')
+		));
 	}
 
 /**

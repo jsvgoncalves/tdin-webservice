@@ -69,4 +69,14 @@ class Ticket extends AppModel {
 			'order' => ''
 		)
 	);
+
+	public $hasMany = array(
+		'SecondaryTicket' => array(
+			'className' => 'SecondaryTicket',
+			'foreignKey' => 'ticket_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+	);
 }
